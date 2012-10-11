@@ -1,0 +1,8 @@
+/chapters
+/docs
+/slides
+/tools
+*.out
+*.tst
+*.cmp
+/projects/00/Xor.hdl
