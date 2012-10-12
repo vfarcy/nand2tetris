@@ -1,0 +1,32 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/02/FullAdder.hdl
+
+/**
+ * Full adder. Computes sum, the least significant bit of 
+ * a + b + c, and carry, the most significant bit of a + b + c.
+ */
+
+CHIP FullAdder {
+    IN a, b, c;  // 1-bit inputs
+    OUT sum,     // Right bit of a + b + c
+        carry;   // Left bit of a + b + c
+
+    PARTS:
+    Xor(a=a, b=b, out=axb);
+    Xor(a=axb, b=c, out=sum);
+
+    // Carry: naive implementation (a*b + a*c + b*c)
+    // And(a=a, b=b, out=ab);
+    // And(a=a, b=c, out=ac);
+    // And(a=b, b=c, out=bc);
+    // Or(a=ab, b=ac, out=abac);
+    // Or(a=abac, b=bc, out=carry);
+
+    // Carry: saving two gates (let % denote XOR)
+    // a*b + a*c + b*c = (a%b)*c + a*b
+    And(a=axb, b=c, out=axbc);
+    And(a=a, b=b, out=ab);
+    Or(a=axbc, b=ab, out=carry);
+}
