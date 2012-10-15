@@ -5,4 +5,5 @@
 *.out
 *.tst
 *.cmp
+*.hack
 /projects/00/Xor.hdl
